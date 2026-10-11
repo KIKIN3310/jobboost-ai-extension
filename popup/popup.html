@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobBoost AI</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="shell">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <img src="../icons/icon-48.png" alt="JobBoost AI" class="brand-logo">
+        <div class="brand-text">
+          <span class="brand-name">JobBoost <span class="tag-ai">AI</span></span>
+          <span class="brand-desc">Copiloto y Tracker para LinkedIn</span>
+        </div>
+      </div>
+      <div id="statusPill" class="status-pill">5 / 5 libres</div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+      <button class="nav-btn active" data-tab="tabProfile">Perfil</button>
+      <button class="nav-btn" data-tab="tabTracker">Mis Postulaciones</button>
+      <button class="nav-btn" data-tab="tabSettings">Ajustes</button>
+      <button class="nav-btn" data-tab="tabLicense">Licencia</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="panel-body">
+      <!-- Tab 1: Perfil -->
+      <section id="tabProfile" class="tab-pane active">
+        <div class="field">
+          <label for="userName">Nombre Completo</label>
+          <input type="text" id="userName" placeholder="Ej. Carlos Mendoza" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="userRole">Puesto o Título Profesional</label>
+          <input type="text" id="userRole" placeholder="Ej. Senior Frontend Developer / Growth Lead" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="userSkills">Habilidades Clave (separadas por comas)</label>
+          <input type="text" id="userSkills" placeholder="Ej. React, TypeScript, GraphQL, Liderazgo técnico" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="userSummary">Extracto de CV y Logros Clave</label>
+          <textarea id="userSummary" rows="4" placeholder="Describe tus logros cuantificables, responsabilidades principales y áreas de especialidad..."></textarea>
+        </div>
+
+        <div class="actions">
+          <button id="saveProfileBtn" class="btn btn-primary">Guardar Perfil</button>
+        </div>
+        <div id="profileFeedback" class="status-message"></div>
+      </section>
+
+      <!-- Tab 2: Mis Postulaciones (Tracker) -->
+      <section id="tabTracker" class="tab-pane">
+        <div class="tracker-toolbar">
+          <div class="filter-group">
+            <label for="statusFilter">Filtrar:</label>
+            <select id="statusFilter" class="filter-select">
+              <option value="ALL">Todos los estados</option>
+              <option value="Guardada">Guardada</option>
+              <option value="Postulado">Postulado</option>
+              <option value="Entrevista">Entrevista</option>
+              <option value="Rechazado">Rechazado</option>
+              <option value="Oferta">Oferta</option>
+            </select>
+          </div>
+          <span id="trackerCount" class="tracker-count">0 guardadas</span>
+        </div>
+
+        <!-- Lista de postulaciones -->
+        <div id="trackerList" class="tracker-list">
+          <!-- Renderizado dinámico desde popup.js -->
+        </div>
+      </section>
+
+      <!-- Tab 3: Ajustes -->
+      <section id="tabSettings" class="tab-pane">
+        <div class="field">
+          <label for="apiKey">API Key de Gemini Flash (Opcional)</label>
+          <input type="password" id="apiKey" placeholder="AIzaSy..." autocomplete="off">
+          <span class="caption">
+            Si no configuras clave, se utiliza el motor semántico local estructurado sin costo. 
+            Obtén tu clave gratis en <a href="https://aistudio.google.com/" target="_blank" class="subtle-link">Google AI Studio</a>.
+          </span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="outputLanguage">Idioma de Salida</label>
+            <select id="outputLanguage">
+              <option value="es">Español</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="toneStyle">Tono Predeterminado</label>
+            <select id="toneStyle">
+              <option value="startup">Startup / Tech</option>
+              <option value="corporate">Corporativo</option>
+              <option value="concise">Conciso</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="saveSettingsBtn" class="btn btn-secondary">Guardar Ajustes</button>
+        </div>
+        <div id="settingsFeedback" class="status-message"></div>
+      </section>
+
+      <!-- Tab 4: Licencia Pro -->
+      <section id="tabLicense" class="tab-pane">
+        <div class="card-metric">
+          <div class="metric-label">Uso de postulaciones gratuitas</div>
+          <div class="metric-value" id="quotaDisplay">0 / 5 consumidas</div>
+          <div class="metric-bar-bg">
+            <div class="metric-bar-fill" id="quotaProgress"></div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top: 14px;">
+          <label for="licenseKey">Clave de Licencia Pro</label>
+          <div class="inline-input-group">
+            <input type="text" id="licenseKey" placeholder="Código de activación" autocomplete="off">
+            <button id="activateLicenseBtn" class="btn btn-outline">Activar</button>
+          </div>
+          <span class="caption">Código de prueba para desarrollo: <code>PRO-VIP-2026</code></span>
+        </div>
+        <div id="licenseFeedback" class="status-message"></div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>Pulsa <strong>"Guardar en Tracker"</strong> en LinkedIn para organizar tus vacantes.</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
